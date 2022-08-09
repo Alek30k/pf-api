@@ -6,7 +6,8 @@ import routerApi from "./routers/index";
 
 // const { logError, errorHandler } = require('./middlewares/error.handler.js');
 import { logError, errorHandler } from "./middlewares/error.handler";
-
+import { env } from "process";
+const { CORS_URL } = process.env;
 const app: Express = express();
 const port: number = 3001;
 
@@ -15,7 +16,7 @@ app.use(express.json());
 //aca vamos a poner los cors
 
 app.use((req: Request, res: Response, next: NextFunction): void => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", CORS_URL); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Headers", "*");
   res.header(
