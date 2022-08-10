@@ -1,9 +1,9 @@
-import setupModels from "../db";
+// import setupModels from "../db";
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
-const fs = require("fs");
-const path = require("path");
-import { config } from "./config";
+// const fs = require("fs");
+// const path = require("path");
+// import { config } from "./config";
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 let sequelize =
@@ -17,7 +17,7 @@ let sequelize =
         },
       })
     : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/universalmusic`,
+        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/universalmusicpf`,
         { logging: false, native: false }
       );
 // const dbUrlLocal: string = postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName};
