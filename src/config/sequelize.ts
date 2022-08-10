@@ -4,7 +4,7 @@ require("dotenv").config();
 // const fs = require("fs");
 // const path = require("path");
 // import { config } from "./config";
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DATABASE_URL } = process.env;
 
 let sequelize =
   process.env.NODE_ENV === "production"
@@ -17,7 +17,7 @@ let sequelize =
         },
       })
     : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/universalmusicpf`,
+        `DATABASE_URL,
         { logging: false, native: false }
       );
 // const dbUrlLocal: string = postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName};
