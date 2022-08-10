@@ -1,22 +1,44 @@
 // import setupModels from "../db";
+require("dotenv").config();
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 // const fs = require("fs");
 // const path = require("path");
 // import { config } from "./config";
-const { DATABASE_URL } = process.env;
+// const { DATABASE_URL } = process.env;
+const {
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DB_NAME,
+  DB_PORT,
+  DATABASE_URL,
+  ENVIRONMENT,
+} = process.env;
 
-let sequelize =
-  process.env.NODE_ENV === "production"
-    ? new Sequelize(process.env.DATABASE_URL, {
+const url =
+  ENVIRONMENT === "development"
+    ? `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
+    : DATABASE_URL;
+
+const options =
+  ENVIRONMENT === "development"
+    ? {
+        logging: false,
+        native: false,
+      }
+    : {
+        logging: false,
+        native: false, // lets Sequelize know we can use pg-native for ~30% more speed
         dialectOptions: {
           ssl: {
             require: true,
             rejectUnauthorized: false,
           },
         },
-      })
-    : new Sequelize(DATABASE_URL, { logging: false, native: false });
+      };
+
+const sequelize = new Sequelize(url, options);
 
 // const dbUrlLocal: string = postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName};
 
