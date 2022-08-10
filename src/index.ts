@@ -12,6 +12,7 @@ const app: Express = express();
 const port: number = 3001;
 
 app.use(express.json());
+const { PORT } = process.env;
 
 //aca vamos a poner los cors
 
@@ -39,6 +40,6 @@ app.use(logError);
 app.use(errorHandler);
 
 //por ultimo el puerto por donde escucha
-app.listen(port, (): void => {
-  console.log(`Utilizando el puerto ${port}`);
+app.listen(process.env.PORT || 3001, (): void => {
+  // console.log(`Utilizando el puerto ${port}`);
 });
