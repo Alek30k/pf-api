@@ -1,5 +1,5 @@
 // const express = require('express');
-import express, { Express, Request, Response, NextFunction } from "express";
+import express, { Express, Response } from "express";
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -9,13 +9,14 @@ import routerApi from "./routers/index";
 
 // const { logError, errorHandler } = require('./middlewares/error.handler.js');
 import { logError, errorHandler } from "./middlewares/error.handler";
-import { env } from "process";
-const { CORS_URL } = process.env;
+// import { env } from "process";
+// const { CORS_URL } = process.env;
 const app: Express = express();
-const port: number = 3001;
+// const port: number = 3001;
+const { conn } = require("./src/db");
 
 app.use(express.json());
-const { PORT } = process.env;
+// const { PORT } = process.env;
 
 //aca vamos a poner los cors
 app.use(cors());
@@ -37,7 +38,7 @@ app.use((_req: any, res: any, next: any) => {
 });
 
 //aca mostrando la ruta principal
-app.get("/", (req: Request, res: Response): void => {
+app.get("/", (res: Response): void => {
   res.send("Esta funcionando correctamente!");
 });
 
@@ -49,6 +50,8 @@ app.use(logError);
 app.use(errorHandler);
 
 //por ultimo el puerto por donde escucha
-app.listen(process.env.PORT || 3001, (): void => {
-  // console.log(`Utilizando el puerto ${port}`);
+conn.sync({ force: false }).then(() => {
+  app.listen(process.env.PORT || 3001, () => {
+    console.log("%s listening at 3001"); // eslint-disable-line no-console
+  });
 });
