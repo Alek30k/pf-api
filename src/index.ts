@@ -10,7 +10,7 @@ import routerApi from "./routers/index";
 // const { logError, errorHandler } = require('./middlewares/error.handler.js');
 import { logError, errorHandler } from "./middlewares/error.handler";
 // import { env } from "process";
-// const { CORS_URL } = process.env;
+const { CORS_URL } = process.env;
 const app: Express = express();
 // const port: number = 3001;
 const { conn } = require("./src/db");
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
 app.use((_req: any, res: any, next: any) => {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", CORS_URL); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
