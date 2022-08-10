@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"tsc --watch \" \"node .\"",
-    "build": "tsc"
+    "dev": "ts-node-dev index.ts",
+    "start": "node build/index.js",
+    "build": "tsc --build",
+    "tsc": "tsc",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
