@@ -48,3 +48,56 @@ sequelize.sync({ force: false });
 
 export default sequelize;
 // module.exports = sequelize;
+
+const basename = path.basename(__filename);
+
+const modelDefiners: any[] = [];
+//hola
+// Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
+fs.readdirSync(path.join(__dirname, "/models"))
+  .filter(
+    (file: any) =>
+      file.indexOf(".") !== 0 &&
+      file !== basename &&
+      (file.slice(-3) === ".ts" || file.slice(-3) === ".js")
+  )
+  .forEach((file: any) => {
+    modelDefiners.push(require(path.join(__dirname, "/models", file)));
+  });
+
+// Injectamos la conexion (sequelize) a todos los modelos
+modelDefiners.forEach((model) => model(sequelize));
+// Capitalizamos los nombres de los modelos ie: product => Product
+let entries = Object.entries(sequelize.models);
+let capsEntries = entries.map((entry) => [
+  entry[0][0].toUpperCase() + entry[0].slice(1),
+  entry[1],
+]);
+sequelize.models = Object.fromEntries(capsEntries);
+
+// En sequelize.models están todos los modelos importados como propiedades
+// Para relacionarlos hacemos un destructuring
+
+const { User, Product, Order } = sequelize.models;
+
+// Aca vendrian las relaciones
+
+/* Un usuario tiene muchos procutos // Un producto pertenece a muchos usuarios */
+User.hasMany(Product, { sourceKey: "id", foreignKey: "user_id", as: "sell" });
+// console.log(sequelize.models)
+
+// User.hasMany(Product);
+Product.belongsTo(User);
+
+/* Un usuario tiene muchos pedidos // Un pedido pertenece a un usuario */
+User.hasMany(Order);
+Order.belongsTo(User);
+
+/* Un pedido tiene muchos procutos // Un producto pertenece a muchos pedidos */
+Order.hasMany(Product);
+Product.belongsTo(Order);
+
+module.exports = {
+  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+};
