@@ -5,11 +5,12 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 import setupModels from "../db";
 const path = require("path");
 const fs = require("fs");
+require("dotenv").config();
 
 // const {config} = require('../config/config');
-import { config } from "./config";
+// import { config } from "./config";
 
-const dbUrl: string = `postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+// const dbUrl: string = `postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
 
 // const sequelize: Sequelize = new Sequelize(dbUrl, {
 //   dialect: "postgres",
