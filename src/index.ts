@@ -3,6 +3,7 @@ import express, { Express, Response } from "express";
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const { PORT } = require("./config");
 
 // const routerApi = require('./routers');
 import routerApi from "./routers/index";
@@ -51,7 +52,7 @@ app.use(errorHandler);
 
 //por ultimo el puerto por donde escucha
 conn.sync({ force: false }).then(() => {
-  app.listen(process.env.PORT || 3001, () => {
+  app.listen(PORT, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
 });
