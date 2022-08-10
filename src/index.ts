@@ -16,13 +16,16 @@ const { PORT } = process.env;
 
 //aca vamos a poner los cors
 
-app.use((req: Request, res: Response, next: NextFunction): void => {
-  res.header("Access-Control-Allow-Origin", CORS_URL); // update to match the domain you will make the request from
+app.use((_req: any, res: any, next: any) => {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Headers", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   res.header(
     "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    "GET, POST, OPTIONS, PATCH,  PUT, DELETE"
   );
   next();
 });
