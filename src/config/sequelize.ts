@@ -3,6 +3,8 @@ import { Sequelize } from "sequelize";
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 // const setupModels = require('../db/models/index');
 import setupModels from "../db";
+const path = require("path");
+const fs = require("fs");
 
 // const {config} = require('../config/config');
 import { config } from "./config";

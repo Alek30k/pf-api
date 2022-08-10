@@ -3,6 +3,7 @@ import express, { Express, Request, Response, NextFunction } from "express";
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+
 // const routerApi = require('./routers');
 import routerApi from "./routers/index";
 
