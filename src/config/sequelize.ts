@@ -50,7 +50,7 @@ setupModels(sequelize);
 sequelize.sync({ force: false });
 
 export default sequelize;
-// module.exports = sequelize;
+// module.exports = sequelize;;
 
 const basename = path.basename(__filename);
 
