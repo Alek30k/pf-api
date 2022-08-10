@@ -1,6 +1,8 @@
 // const express = require('express');
 import express, { Express, Request, Response, NextFunction } from "express";
-
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 // const routerApi = require('./routers');
 import routerApi from "./routers/index";
 
@@ -15,7 +17,10 @@ app.use(express.json());
 const { PORT } = process.env;
 
 //aca vamos a poner los cors
-
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(cookieParser());
 app.use((_req: any, res: any, next: any) => {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
