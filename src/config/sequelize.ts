@@ -16,10 +16,8 @@ let sequelize =
           },
         },
       })
-    : new Sequelize(
-        `DATABASE_URL,
-        { logging: false, native: false }
-      );
+    : new Sequelize(DATABASE_URL, { logging: false, native: false });
+
 // const dbUrlLocal: string = postgres://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName};
 
 // const url: string = ${config.dbUrl};
