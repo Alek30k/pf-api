@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"tsc --watch \" \"node .\"",
+    "dev": "concurrently \"tsc --watch \" \"nodemon .\"",
     "build": "tsc"
   },
   "repository": {
